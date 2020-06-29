@@ -1,10 +1,10 @@
 package com.mrp_v2.redstonequit.block;
 
-public class RedstoneQuitBlock extends RedstoneQuitBlockBase {
+public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase {
 
-	public static final String ID = "redstone_quit_block";
+	public static final String ID = "redstone_quit_test_block";
 
-	public RedstoneQuitBlock() {
+	public RedstoneQuitTestBlock() {
 		super(ID);
 	}
 
