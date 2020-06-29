@@ -1,3 +1,4 @@
 {
-	"block.redstonequit.redstone_quit_block": "Quit Block"
+	"block.redstonequit.redstone_quit_block": "Quit Block",
+	"block.redstonequit.redstone_quit_test_block": "Test Quit Block"
 }
