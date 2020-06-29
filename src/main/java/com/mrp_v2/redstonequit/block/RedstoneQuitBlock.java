@@ -11,13 +11,14 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ToolType;
 
 public class RedstoneQuitBlock extends Block {
-	
+
 	public static final String ID = "redstone_quit_block";
 
 	public RedstoneQuitBlock() {
-		super(Properties.create(Material.IRON, MaterialColor.IRON));
+		super(Properties.create(Material.IRON, MaterialColor.IRON).harvestTool(ToolType.PICKAXE));
 		this.setRegistryName(RedstoneQuit.MODID, ID);
 	}
 
