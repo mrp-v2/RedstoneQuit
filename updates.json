@@ -1,0 +1,9 @@
+{
+	"homepage": "https://minecraft.curseforge.com/projects/redstone-quit",
+	"promos": {
+		"1.16.1-latest": "1.0.0.0",
+		"1.16.1-recommended": "1.0.0.0",
+		"latest": "1.0.0.0",
+		"recommended": "1.0.0.0"
+	}
+}
