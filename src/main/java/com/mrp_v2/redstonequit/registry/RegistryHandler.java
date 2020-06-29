@@ -2,12 +2,10 @@ package com.mrp_v2.redstonequit.registry;
 
 import com.mrp_v2.redstonequit.RedstoneQuit;
 import com.mrp_v2.redstonequit.block.RedstoneQuitBlock;
+import com.mrp_v2.redstonequit.block.RedstoneQuitTestBlock;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -17,20 +15,24 @@ import net.minecraftforge.registries.ObjectHolder;
 public class RegistryHandler {
 
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitBlock.ID)
-	public static final Block redstoneQuitBlock = null;
+	public static final RedstoneQuitBlock redstoneQuitBlock = null;
+
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitBlock.ID)
 	public static final Item redstoneQuitBlockItem = null;
 
+	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitTestBlock.ID)
+	public static final RedstoneQuitTestBlock redstoneQuitTestBlock = null;
+
+	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitTestBlock.ID)
+	public static final Item redstoneQuitTestBlockItem = null;
+
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().register(new RedstoneQuitBlock());
+		event.getRegistry().registerAll(new RedstoneQuitBlock(), new RedstoneQuitTestBlock());
 	}
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry()
-				.register(new BlockItem(redstoneQuitBlock,
-						new Item.Properties().addToolType(ToolType.PICKAXE, 1).group(ItemGroup.REDSTONE))
-								.setRegistryName(RedstoneQuit.MODID, RedstoneQuitBlock.ID));
+		event.getRegistry().registerAll(redstoneQuitBlock.createBlockItem(), redstoneQuitTestBlock.createBlockItem());
 	}
 }
