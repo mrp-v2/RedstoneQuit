@@ -14,7 +14,7 @@ import net.minecraft.world.server.ServerWorld;
 
 public class RedstoneQuitBlock extends Block {
 	
-	public static final String ID = "redstoneQuitBlock";
+	public static final String ID = "redstone_quit_block";
 
 	public RedstoneQuitBlock() {
 		super(Properties.create(Material.IRON, MaterialColor.IRON));
