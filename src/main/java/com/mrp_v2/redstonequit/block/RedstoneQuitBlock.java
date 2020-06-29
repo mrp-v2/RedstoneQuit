@@ -2,17 +2,21 @@ package com.mrp_v2.redstonequit.block;
 
 import java.util.Random;
 
+import com.mrp_v2.redstonequit.RedstoneQuit;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class RedstoneQuitBlock extends Block {
 
-	public RedstoneQuitBlock(Properties properties) {
-		super(properties);
-		// TODO Auto-generated constructor stub
+	public RedstoneQuitBlock() {
+		super(Properties.create(Material.IRON, MaterialColor.IRON));
+		this.setRegistryName(RedstoneQuit.MODID, "redstoneQuitBlock");
 	}
 
 	@Override
@@ -33,6 +37,6 @@ public class RedstoneQuitBlock extends Block {
 	}
 
 	protected void quitCheck(int redstonePower) {
-		
+
 	}
 }
