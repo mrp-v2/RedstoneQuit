@@ -14,7 +14,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
@@ -68,6 +71,15 @@ abstract public class RedstoneQuitBlockBase extends Block {
 	}
 
 	abstract void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos);
+
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult hit) {
+		return worldIn.isRemote ? ActionResultType.SUCCESS
+				: doBlockActivated(worldIn, pos) ? ActionResultType.CONSUME : ActionResultType.PASS;
+	}
+
+	abstract boolean doBlockActivated(World worldIn, BlockPos pos);
 
 	private ArrayList<PlayerEntity> getNearbyPlayers(ServerWorld worldIn, BlockPos pos, double range) {
 		ArrayList<PlayerEntity> nearbyPlayers = new ArrayList<PlayerEntity>();
