@@ -10,6 +10,7 @@ import net.minecraftforge.fml.config.ModConfig;
 public class RedstoneQuit {
 
 	public static final String MODID = "redstonequit";
+	public static final String TRANSLATION_KEY_STEM = "mrp_v2." + MODID + ".";
 
 	public RedstoneQuit() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigOptions.serverSpec);
