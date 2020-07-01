@@ -62,7 +62,7 @@ abstract public class RedstoneQuitBlockBase extends Block {
 				.setRegistryName(this.getRegistryName());
 	}
 
-	abstract boolean doBlockActivated(World worldIn, BlockPos pos);
+	abstract boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos);
 
 	abstract void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos);
 
@@ -116,5 +116,10 @@ abstract public class RedstoneQuitBlockBase extends Block {
 		if (worldIn.isBlockPowered(pos)) {
 			blockPowered(worldIn.getRedstonePowerFromNeighbors(pos), worldIn, pos);
 		}
+	}
+
+	protected BlockState changeBlock(BlockState oldState, RedstoneQuitBlockBase newBlock) {
+		return newBlock.getDefaultState().with(BlockStateProperties.POWER_0_15,
+				Integer.valueOf(oldState.get(BlockStateProperties.POWER_0_15)));
 	}
 }
