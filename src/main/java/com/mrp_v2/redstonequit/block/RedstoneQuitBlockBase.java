@@ -96,6 +96,11 @@ abstract public class RedstoneQuitBlockBase extends Block {
 				: doBlockActivated(worldIn, pos) ? ActionResultType.CONSUME : ActionResultType.PASS;
 	}
 
+	@Override
+	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+		worldIn.getPendingBlockTicks().scheduleTick(pos, this, 0);
+	}
+
 	private boolean playerWithinRange(BlockPos pos, PlayerEntity player, double range) {
 		if (range < 0) {
 			return true;
