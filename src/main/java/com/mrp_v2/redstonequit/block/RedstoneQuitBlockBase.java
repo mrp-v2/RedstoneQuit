@@ -14,6 +14,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -24,10 +26,12 @@ import net.minecraftforge.common.ToolType;
 
 abstract public class RedstoneQuitBlockBase extends Block {
 
-	private static final ToolType tool = ToolType.PICKAXE;
+	private static final ToolType TOOL_TYPE = ToolType.PICKAXE;
+	
+	public static final IntegerProperty POWER = BlockStateProperties.POWER_0_15;
 
 	public RedstoneQuitBlockBase(String blockID) {
-		super(Properties.create(Material.IRON, MaterialColor.IRON).harvestTool(tool));
+		super(Properties.create(Material.IRON, MaterialColor.IRON).harvestTool(TOOL_TYPE));
 		this.setRegistryName(RedstoneQuit.MODID, blockID);
 	}
 
@@ -47,7 +51,7 @@ abstract public class RedstoneQuitBlockBase extends Block {
 	}
 
 	public Item createBlockItem() {
-		return new BlockItem(this, new Item.Properties().addToolType(tool, 1).group(ItemGroup.REDSTONE))
+		return new BlockItem(this, new Item.Properties().addToolType(TOOL_TYPE, 1).group(ItemGroup.REDSTONE))
 				.setRegistryName(this.getRegistryName());
 	}
 
