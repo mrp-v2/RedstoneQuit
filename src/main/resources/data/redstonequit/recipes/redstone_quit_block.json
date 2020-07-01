@@ -8,7 +8,7 @@
 	],
 	"key":{
 		"R": {
-			"item": "minecraft:redstone_block"
+			"tag": "forge:storage_blocks/redstone"
 		},
 		"C": {
 			"item": "minecraft:comparator"
@@ -17,7 +17,7 @@
 			"item": "minecraft:tripwire_hook"
 		},
 		"S": {
-			"item": "minecraft:string"
+			"tag": "forge:string"
 		}
 	},
 	"result":{
