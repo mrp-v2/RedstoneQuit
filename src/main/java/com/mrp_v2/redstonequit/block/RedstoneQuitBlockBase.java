@@ -93,7 +93,7 @@ abstract public class RedstoneQuitBlockBase extends Block {
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
 		return worldIn.isRemote ? ActionResultType.SUCCESS
-				: doBlockActivated(worldIn, pos) ? ActionResultType.CONSUME : ActionResultType.PASS;
+				: doBlockActivated(state, worldIn, pos) ? ActionResultType.CONSUME : ActionResultType.PASS;
 	}
 
 	@Override
