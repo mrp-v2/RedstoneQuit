@@ -1,4 +1,6 @@
 {
 	"block.redstonequit.redstone_quit_block": "Quit Block",
-	"block.redstonequit.redstone_quit_test_block": "Test Quit Block"
+	"block.redstonequit.redstone_quit_test_block": "Test Quit Block",
+	"mrp_v2.redstonequit.redstone_quit_block.disconnect_message": "Disconnected by Quit Block",
+	"mrp_v2.redstonequit.redstone_quit_test_block.test_quit_message": "(Test Quit Block) You have been disconnected!"
 }
