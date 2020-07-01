@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ObjectHolder;
 
 @EventBusSubscriber(modid = RedstoneQuit.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class RegistryHandler {
+public class RedstoneQuitRegistryHandler {
 
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitBlock.ID)
 	public static final RedstoneQuitBlock REDSTONE_QUIT_BLOCK = null;

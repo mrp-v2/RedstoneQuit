@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class MessageHelper {
+public class RedstoneQuitMessageHelper {
 
 	public static void sendMessage(Entity player, ITextComponent messageTranslation) {
 		player.sendMessage(messageTranslation, UUID.randomUUID());
