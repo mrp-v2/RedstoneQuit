@@ -1,9 +1,11 @@
 package com.mrp_v2.redstonequit.block;
 
+import com.mrp_v2.redstonequit.registry.RegistryHandler;
 import com.mrp_v2.redstonequit.util.MessageHelper;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase {
@@ -19,5 +21,11 @@ public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase {
 	@Override
 	void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos) {
 		MessageHelper.SendMessage(player, testQuitMessage);
+	}
+
+	@Override
+	boolean doBlockActivated(World worldIn, BlockPos pos) {
+		worldIn.setBlockState(pos, RegistryHandler.redstoneQuitBlock.getDefaultState(), 1 | 2);
+		return true;
 	}
 }
