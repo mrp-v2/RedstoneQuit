@@ -1,10 +1,10 @@
 modLoader="javafml"
 loaderVersion="[32,)"
-logoFile="RedstoneQuitLogo.png"
 [[mods]]
 	modId="redstonequit"
 	version="1.16.1-1.0.0.0"
 	displayName="Redstone Quit"
+	logoFile="RedstoneQuitLogo.png"
 	updateJSONURL="https://raw.githubusercontent.com/mrp-v2/ModUpdateFiles/master/RedstoneQuit.json"
 	issueTrackerURL="https://www.curseforge.com/minecraft/mc-mods/redstone-quit/issues"
 	displayURL="https://minecraft.curseforge.com/projects/redstone-quit"
