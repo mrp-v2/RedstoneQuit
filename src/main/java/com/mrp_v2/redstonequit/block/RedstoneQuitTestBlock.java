@@ -1,7 +1,7 @@
 package com.mrp_v2.redstonequit.block;
 
-import com.mrp_v2.redstonequit.registry.RegistryHandler;
-import com.mrp_v2.redstonequit.util.MessageHelper;
+import com.mrp_v2.redstonequit.registry.RedstoneQuitRegistryHandler;
+import com.mrp_v2.redstonequit.util.RedstoneQuitMessageHelper;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,13 +18,13 @@ public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase {
 	}
 
 	@Override
-	void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos) {
-		MessageHelper.sendTranslatedMessage(player, ID, "test_quit_message");
+	boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos) {
+		worldIn.setBlockState(pos, this.changeBlock(state, RedstoneQuitRegistryHandler.REDSTONE_QUIT_BLOCK), 1 | 2);
+		return true;
 	}
 
 	@Override
-	boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, this.changeBlock(state, RegistryHandler.REDSTONE_QUIT_BLOCK), 1 | 2);
-		return true;
+	void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos) {
+		RedstoneQuitMessageHelper.sendTranslatedMessage(player, ID, "test_quit_message");
 	}
 }

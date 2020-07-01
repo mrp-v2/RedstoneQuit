@@ -1,7 +1,7 @@
 package com.mrp_v2.redstonequit.block;
 
-import com.mrp_v2.redstonequit.registry.RegistryHandler;
-import com.mrp_v2.redstonequit.util.MessageHelper;
+import com.mrp_v2.redstonequit.registry.RedstoneQuitRegistryHandler;
+import com.mrp_v2.redstonequit.util.RedstoneQuitMessageHelper;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,16 +19,16 @@ public class RedstoneQuitBlock extends RedstoneQuitBlockBase {
 	}
 
 	@Override
-	public void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos) {
-		if (!worldIn.isRemote) {
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-			serverPlayer.connection.disconnect(MessageHelper.constructTranslation(ID, "disconnect_message"));
-		}
+	boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos) {
+		worldIn.setBlockState(pos, this.changeBlock(state, RedstoneQuitRegistryHandler.REDSTONE_QUIT_TEST_BLOCK), 1 | 2);
+		return true;
 	}
 
 	@Override
-	boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, this.changeBlock(state, RegistryHandler.REDSTONE_QUIT_TEST_BLOCK), 1 | 2);
-		return true;
+	public void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos) {
+		if (!worldIn.isRemote) {
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+			serverPlayer.connection.disconnect(RedstoneQuitMessageHelper.constructTranslation(ID, "disconnect_message"));
+		}
 	}
 }
