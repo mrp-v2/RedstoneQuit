@@ -12,7 +12,7 @@ public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase {
 
 	public static final String ID = "redstone_quit_test_block";
 
-	public static final String testQuitMessage = "(Test Quit Block) You have been kicked!";
+	public static final String TEST_QUIT_MESSAGE = "(Test Quit Block) You have been kicked!";
 
 	public RedstoneQuitTestBlock() {
 		super(ID);
@@ -20,12 +20,12 @@ public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase {
 
 	@Override
 	void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos) {
-		MessageHelper.SendMessage(player, testQuitMessage);
+		MessageHelper.SendMessage(player, TEST_QUIT_MESSAGE);
 	}
 
 	@Override
 	boolean doBlockActivated(World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, RegistryHandler.redstoneQuitBlock.getDefaultState(), 1 | 2);
+		worldIn.setBlockState(pos, RegistryHandler.REDSTONE_QUIT_BLOCK.getDefaultState(), 1 | 2);
 		return true;
 	}
 }

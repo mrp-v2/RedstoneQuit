@@ -15,16 +15,16 @@ import net.minecraftforge.registries.ObjectHolder;
 public class RegistryHandler {
 
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitBlock.ID)
-	public static final RedstoneQuitBlock redstoneQuitBlock = null;
+	public static final RedstoneQuitBlock REDSTONE_QUIT_BLOCK = null;
 
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitBlock.ID)
-	public static final Item redstoneQuitBlockItem = null;
+	public static final Item REDSTONE_QUIT_BLOCK_ITEM = null;
 
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitTestBlock.ID)
-	public static final RedstoneQuitTestBlock redstoneQuitTestBlock = null;
+	public static final RedstoneQuitTestBlock REDSTONE_QUIT_TEST_BLOCK = null;
 
 	@ObjectHolder(RedstoneQuit.MODID + ":" + RedstoneQuitTestBlock.ID)
-	public static final Item redstoneQuitTestBlockItem = null;
+	public static final Item REDSTONE_QUIT_TEST_BLOCK_ITEM = null;
 
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -33,6 +33,7 @@ public class RegistryHandler {
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(redstoneQuitBlock.createBlockItem(), redstoneQuitTestBlock.createBlockItem());
+		event.getRegistry().registerAll(REDSTONE_QUIT_BLOCK.createBlockItem(),
+				REDSTONE_QUIT_TEST_BLOCK.createBlockItem());
 	}
 }

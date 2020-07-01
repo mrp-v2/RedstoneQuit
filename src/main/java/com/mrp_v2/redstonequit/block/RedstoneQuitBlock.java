@@ -23,7 +23,7 @@ public class RedstoneQuitBlock extends RedstoneQuitBlockBase {
 
 	@Override
 	boolean doBlockActivated(World worldIn, BlockPos pos) {
-		worldIn.setBlockState(pos, RegistryHandler.redstoneQuitTestBlock.getDefaultState(), 1 | 2);
+		worldIn.setBlockState(pos, RegistryHandler.REDSTONE_QUIT_TEST_BLOCK.getDefaultState(), 1 | 2);
 		return true;
 	}
 }
