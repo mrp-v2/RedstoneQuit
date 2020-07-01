@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.mrp_v2.redstonequit.RedstoneQuit;
-import com.mrp_v2.redstonequit.config.ConfigOptions;
+import com.mrp_v2.redstonequit.config.RedstoneQuitConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -46,7 +46,7 @@ abstract public class RedstoneQuitBlockBase extends Block {
 		if (redstonePower <= 0 || redstonePower >= 15) {
 			return;
 		}
-		int range = ConfigOptions.getRangeForStrength(redstonePower);
+		int range = RedstoneQuitConfig.getRangeForStrength(redstonePower);
 		if (redstonePower % 2 == 0) {
 			for (PlayerEntity pe2 : getNearbyPlayers(worldIn, pos, range)) {
 				doPlayerAction(pe2, worldIn, pos);
@@ -57,6 +57,11 @@ abstract public class RedstoneQuitBlockBase extends Block {
 				doPlayerAction(pe1, worldIn, pos);
 			}
 		}
+	}
+
+	protected BlockState changeBlock(BlockState oldState, RedstoneQuitBlockBase newBlock) {
+		return newBlock.getDefaultState().with(BlockStateProperties.POWER_0_15,
+				Integer.valueOf(oldState.get(BlockStateProperties.POWER_0_15)));
 	}
 
 	public Item createBlockItem() {
@@ -116,10 +121,5 @@ abstract public class RedstoneQuitBlockBase extends Block {
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		blockPowered(worldIn.getRedstonePowerFromNeighbors(pos), worldIn, pos);
-	}
-
-	protected BlockState changeBlock(BlockState oldState, RedstoneQuitBlockBase newBlock) {
-		return newBlock.getDefaultState().with(BlockStateProperties.POWER_0_15,
-				Integer.valueOf(oldState.get(BlockStateProperties.POWER_0_15)));
 	}
 }
