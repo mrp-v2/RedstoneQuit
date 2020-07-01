@@ -58,4 +58,32 @@ public class ConfigOptions {
 		serverSpec = specPair.getRight();
 		SERVER = specPair.getLeft();
 	}
+
+	public static int getRangeForStrength(int strength) {
+		switch (strength) {
+		case 1:
+		case 2:
+			return redstoneStrength_1_2_Range.get();
+		case 3:
+		case 4:
+			return redstoneStrength_3_4_Range.get();
+		case 5:
+		case 6:
+			return redstoneStrength_5_6_Range.get();
+		case 7:
+		case 8:
+			return redstoneStrength_7_8_Range.get();
+		case 9:
+		case 10:
+			return redstoneStrength_9_10_Range.get();
+		case 11:
+		case 12:
+			return redstoneStrength_11_12_Range.get();
+		case 13:
+		case 14:
+			return redstoneStrength_13_14_Range.get();
+		default:
+			return 0;
+		}
+	}
 }
