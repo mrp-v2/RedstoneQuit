@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "redstone_quit_block",
+	"ingredients": [
+		{
+			"item": "redstonequit:redstone_quit_test_block"
+		}
+	],
+	"result": {
+		"item": "redstonequit:redstone_quit_block",
+		"count": 1
+	}
+}
