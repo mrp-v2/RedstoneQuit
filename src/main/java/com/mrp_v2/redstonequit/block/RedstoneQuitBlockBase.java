@@ -56,24 +56,20 @@ abstract public class RedstoneQuitBlockBase extends Block {
 		}
 		int range = ConfigOptions.getRangeForStrength(redstonePower);
 		if (redstonePower % 2 == 0) {
-			for (PlayerEntity pe2 : worldIn.getPlayers()) {
-				if (playerWithinRange(pos, pe2, range)) {
-					doPlayerAction(pe2, worldIn, pos);
-				}
+			for (PlayerEntity pe2 : getNearbyPlayers(worldIn, pos, range)) {
+				doPlayerAction(pe2, worldIn, pos);
 			}
 		} else {
 			PlayerEntity pe1 = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), range, null);
-			if (pe1 != null) {
-				if (playerWithinRange(pos, pe1, range)) {
-					doPlayerAction(pe1, worldIn, pos);
-				}
+			if (pe1 != null && playerWithinRange(pos, pe1, range)) {
+				doPlayerAction(pe1, worldIn, pos);
 			}
 		}
 	}
 
 	abstract void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos);
 
-	protected ArrayList<PlayerEntity> getNearbyPlayers(ServerWorld worldIn, BlockPos pos, double range) {
+	private ArrayList<PlayerEntity> getNearbyPlayers(ServerWorld worldIn, BlockPos pos, double range) {
 		ArrayList<PlayerEntity> nearbyPlayers = new ArrayList<PlayerEntity>();
 		for (PlayerEntity pe : worldIn.getPlayers()) {
 			if (playerWithinRange(pos, pe, range)) {
@@ -83,7 +79,7 @@ abstract public class RedstoneQuitBlockBase extends Block {
 		return nearbyPlayers;
 	}
 
-	protected boolean playerWithinRange(BlockPos pos, PlayerEntity player, double range) {
+	private boolean playerWithinRange(BlockPos pos, PlayerEntity player, double range) {
 		if (range < 0) {
 			return true;
 		}
