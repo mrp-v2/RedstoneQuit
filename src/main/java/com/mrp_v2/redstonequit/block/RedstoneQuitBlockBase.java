@@ -38,9 +38,12 @@ abstract public class RedstoneQuitBlockBase extends Block {
 	// Even numbers are all,
 	// Odds are nearest
 	protected void blockPowered(int redstonePower, ServerWorld worldIn, BlockPos pos) {
-		if (redstonePower <= 0 || redstonePower >= 15) {
+		if (redstonePower <= 0 || redstonePower >= 15
+				|| redstonePower == worldIn.getBlockState(pos).get(BlockStateProperties.POWER_0_15).intValue()) {
 			return;
 		}
+		worldIn.setBlockState(pos,
+				this.getDefaultState().with(BlockStateProperties.POWER_0_15, Integer.valueOf(redstonePower)), 1 | 2);
 		int range = ConfigOptions.getRangeForStrength(redstonePower);
 		if (redstonePower % 2 == 0) {
 			for (PlayerEntity pe2 : getNearbyPlayers(worldIn, pos, range)) {
