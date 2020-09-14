@@ -1,24 +1,25 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[${forgeMajor},)"
+license="All rights reserved"
 [[mods]]
-	modId="redstonequit"
-	version="1.16.1-1.0.0.0"
-	displayName="Redstone Quit"
-	logoFile="RedstoneQuitLogo.png"
-	updateJSONURL="https://raw.githubusercontent.com/mrp-v2/ModUpdateFiles/master/RedstoneQuit.json"
-	issueTrackerURL="https://www.curseforge.com/minecraft/mc-mods/redstone-quit/issues"
-	displayURL="https://minecraft.curseforge.com/projects/redstone-quit"
-	authors="mrp_v2"
-	description='''Adds a way to exit the world with redstone.'''
-[[dependencies.redstonequit]]
+	modId="${modId}"
+	version="${version}"
+	displayName="${modDisplayName}"
+	logoFile="${logo}"
+	updateJSONURL="${updateURL}"
+	issueTrackerURL="${issuesURL}"
+	displayURL="${homepageURL}"
+	authors="${author}"
+	description='''${modDescription}'''
+[[dependencies.${modId}]]
     modId="forge"
     mandatory=true
-    versionRange="[32,)"
+    versionRange="[${forgeMajor},)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.redstonequit]]
+[[dependencies.${modId}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.1]"
+    versionRange="[${mcVersion}]"
     ordering="NONE"
     side="BOTH"
