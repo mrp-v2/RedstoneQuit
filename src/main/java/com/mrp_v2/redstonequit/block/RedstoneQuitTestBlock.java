@@ -1,7 +1,7 @@
 package com.mrp_v2.redstonequit.block;
 
-import com.mrp_v2.redstonequit.registry.RegistryHandler;
 import com.mrp_v2.redstonequit.util.MessageHelper;
+import com.mrp_v2.redstonequit.util.ObjectHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +19,7 @@ public class RedstoneQuitTestBlock extends RedstoneQuitBlockBase
 
     @Override boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos)
     {
-        worldIn.setBlockState(pos, this.changeBlock(state, RegistryHandler.REDSTONE_QUIT_BLOCK), 1 | 2);
+        worldIn.setBlockState(pos, this.changeBlock(state, ObjectHolder.REDSTONE_QUIT_BLOCK.get()), 1 | 2);
         return true;
     }
 

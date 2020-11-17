@@ -1,6 +1,5 @@
 package com.mrp_v2.redstonequit.block;
 
-import com.mrp_v2.redstonequit.RedstoneQuit;
 import com.mrp_v2.redstonequit.config.ServerConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,7 +31,6 @@ abstract public class RedstoneQuitBlockBase extends Block
         super(Properties.create(Material.IRON, MaterialColor.IRON).harvestTool(TOOL_TYPE));
         this.setDefaultState(
                 this.stateContainer.getBaseState().with(BlockStateProperties.POWER_0_15, Integer.valueOf(0)));
-        this.setRegistryName(RedstoneQuit.ID, blockID);
     }
 
     protected BlockState changeBlock(BlockState oldState, RedstoneQuitBlockBase newBlock)
@@ -41,11 +39,9 @@ abstract public class RedstoneQuitBlockBase extends Block
                 .with(BlockStateProperties.POWER_0_15, Integer.valueOf(oldState.get(BlockStateProperties.POWER_0_15)));
     }
 
-    public Item createBlockItem()
+    public BlockItem createBlockItem()
     {
-        return new BlockItem(this,
-                new Item.Properties().addToolType(TOOL_TYPE, 1).group(ItemGroup.REDSTONE)).setRegistryName(
-                this.getRegistryName());
+        return new BlockItem(this, new Item.Properties().addToolType(TOOL_TYPE, 1).group(ItemGroup.REDSTONE));
     }
 
     @Override protected void fillStateContainer(Builder<Block, BlockState> builder)
