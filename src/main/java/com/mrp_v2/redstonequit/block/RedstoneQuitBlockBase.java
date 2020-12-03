@@ -28,48 +28,49 @@ abstract public class RedstoneQuitBlockBase extends Block
 
     public RedstoneQuitBlockBase(String blockID)
     {
-        super(Properties.create(Material.IRON, MaterialColor.IRON).harvestTool(TOOL_TYPE));
-        this.setDefaultState(
-                this.stateContainer.getBaseState().with(BlockStateProperties.POWER_0_15, Integer.valueOf(0)));
+        super(Properties.of(Material.METAL, MaterialColor.METAL).harvestTool(TOOL_TYPE));
+        this.registerDefaultState(
+                this.stateDefinition.any().setValue(BlockStateProperties.POWER, Integer.valueOf(0)));
     }
 
     protected BlockState changeBlock(BlockState oldState, RedstoneQuitBlockBase newBlock)
     {
-        return newBlock.getDefaultState()
-                .with(BlockStateProperties.POWER_0_15, Integer.valueOf(oldState.get(BlockStateProperties.POWER_0_15)));
+        return newBlock.defaultBlockState()
+                .setValue(BlockStateProperties.POWER, oldState.getValue(BlockStateProperties.POWER));
     }
 
     public BlockItem createBlockItem()
     {
-        return new BlockItem(this, new Item.Properties().addToolType(TOOL_TYPE, 1).group(ItemGroup.REDSTONE));
+        return new BlockItem(this, new Item.Properties().addToolType(TOOL_TYPE, 1).tab(ItemGroup.TAB_REDSTONE));
     }
 
-    @Override protected void fillStateContainer(Builder<Block, BlockState> builder)
+    @Override
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder)
     {
-        builder.add(BlockStateProperties.POWER_0_15);
+        builder.add(BlockStateProperties.POWER);
     }
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
             boolean isMoving)
     {
-        if (!worldIn.isRemote)
+        if (!worldIn.isClientSide)
         {
-            worldIn.getPendingBlockTicks().scheduleTick(pos, this, 0);
+            worldIn.getBlockTicks().scheduleTick(pos, this, 0);
         }
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving)
+    public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving)
     {
-        worldIn.getPendingBlockTicks().scheduleTick(pos, this, 0);
+        worldIn.getBlockTicks().scheduleTick(pos, this, 0);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
             Hand handIn, BlockRayTraceResult hit)
     {
-        return worldIn.isRemote ?
+        return worldIn.isClientSide ?
                 ActionResultType.SUCCESS :
                 doBlockActivated(state, worldIn, pos) ? ActionResultType.CONSUME : ActionResultType.PASS;
     }
@@ -78,19 +79,19 @@ abstract public class RedstoneQuitBlockBase extends Block
 
     @Override public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand)
     {
-        blockPowered(worldIn.getRedstonePowerFromNeighbors(pos), worldIn, pos);
+        blockPowered(worldIn.getBestNeighborSignal(pos), worldIn, pos);
     }
 
     // Even numbers are all,
     // Odds are nearest
     protected void blockPowered(int redstonePower, ServerWorld worldIn, BlockPos pos)
     {
-        if (redstonePower == worldIn.getBlockState(pos).get(BlockStateProperties.POWER_0_15).intValue())
+        if (redstonePower == worldIn.getBlockState(pos).getValue(BlockStateProperties.POWER).intValue())
         {
             return;
         }
-        worldIn.setBlockState(pos,
-                this.getDefaultState().with(BlockStateProperties.POWER_0_15, Integer.valueOf(redstonePower)), 1 | 2);
+        worldIn.setBlock(pos,
+                this.defaultBlockState().setValue(BlockStateProperties.POWER, Integer.valueOf(redstonePower)), 1 | 2);
         if (redstonePower <= 0 || redstonePower >= 15)
         {
             return;
@@ -104,7 +105,7 @@ abstract public class RedstoneQuitBlockBase extends Block
             }
         } else
         {
-            PlayerEntity pe1 = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), range, null);
+            PlayerEntity pe1 = worldIn.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), range, null);
             if (pe1 != null && playerWithinRange(pos, pe1, range))
             {
                 doPlayerAction(pe1, worldIn, pos);
@@ -117,7 +118,7 @@ abstract public class RedstoneQuitBlockBase extends Block
     private ArrayList<PlayerEntity> getNearbyPlayers(ServerWorld worldIn, BlockPos pos, double range)
     {
         ArrayList<PlayerEntity> nearbyPlayers = new ArrayList<PlayerEntity>();
-        for (PlayerEntity pe : worldIn.getPlayers())
+        for (PlayerEntity pe : worldIn.players())
         {
             if (playerWithinRange(pos, pe, range))
             {
@@ -137,6 +138,6 @@ abstract public class RedstoneQuitBlockBase extends Block
         {
             return false;
         }
-        return pos.withinDistance(player.getPositionVec(), range);
+        return pos.closerThan(player.position(), range);
     }
 }

@@ -20,13 +20,13 @@ public class RedstoneQuitBlock extends RedstoneQuitBlockBase
 
     @Override boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos)
     {
-        worldIn.setBlockState(pos, this.changeBlock(state, ObjectHolder.REDSTONE_QUIT_TEST_BLOCK.get()), 1 | 2);
+        worldIn.setBlock(pos, this.changeBlock(state, ObjectHolder.REDSTONE_QUIT_TEST_BLOCK.get()), 1 | 2);
         return true;
     }
 
     @Override public void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos)
     {
-        if (!worldIn.isRemote)
+        if (!worldIn.isClientSide)
         {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
             serverPlayer.connection.disconnect(MessageHelper.constructTranslation(ID, "disconnect_message"));
