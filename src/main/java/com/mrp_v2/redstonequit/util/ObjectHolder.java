@@ -6,10 +6,10 @@ import com.mrp_v2.redstonequit.block.RedstoneQuitTestBlock;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 @EventBusSubscriber(modid = RedstoneQuit.ID, bus = EventBusSubscriber.Bus.MOD) public class ObjectHolder
 {

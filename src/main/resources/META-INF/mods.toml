@@ -14,12 +14,13 @@ license="All rights reserved"
 [[dependencies.${modId}]]
     modId="forge"
     mandatory=true
-    versionRange="[${forgeMajor},)"
+versionRange = "[${minimumForgeVersion},)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.${modId}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[${mcVersion},${mcNextVersion})"
+versionRange = "[${mcVersion}]"
     ordering="NONE"
     side="BOTH"
+${ githubDependencies }
