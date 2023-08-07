@@ -1,9 +1,9 @@
 package com.mrp_v2.redstonequit.util;
 
 import com.mrp_v2.redstonequit.RedstoneQuit;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.Entity;
 
 import java.util.UUID;
 
@@ -14,13 +14,13 @@ public class MessageHelper
         sendMessage(player, constructTranslation(originID, messageID));
     }
 
-    public static void sendMessage(Entity player, ITextComponent messageTranslation)
+    public static void sendMessage(Entity player, Component messageTranslation)
     {
         player.sendMessage(messageTranslation, UUID.randomUUID());
     }
 
-    public static TranslationTextComponent constructTranslation(String originID, String messageID)
+    public static TranslatableComponent constructTranslation(String originID, String messageID)
     {
-        return new TranslationTextComponent(RedstoneQuit.ID + "." + originID + "." + messageID);
+        return new TranslatableComponent(RedstoneQuit.ID + "." + originID + "." + messageID);
     }
 }

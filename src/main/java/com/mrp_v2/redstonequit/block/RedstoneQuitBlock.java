@@ -2,12 +2,12 @@ package com.mrp_v2.redstonequit.block;
 
 import com.mrp_v2.redstonequit.util.MessageHelper;
 import com.mrp_v2.redstonequit.util.ObjectHolder;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class RedstoneQuitBlock extends RedstoneQuitBlockBase
 {
@@ -18,17 +18,19 @@ public class RedstoneQuitBlock extends RedstoneQuitBlockBase
         super(ID);
     }
 
-    @Override boolean doBlockActivated(BlockState state, World worldIn, BlockPos pos)
+    @Override
+    boolean doBlockActivated(BlockState state, Level worldIn, BlockPos pos)
     {
         worldIn.setBlock(pos, this.changeBlock(state, ObjectHolder.REDSTONE_QUIT_TEST_BLOCK.get()), 1 | 2);
         return true;
     }
 
-    @Override public void doPlayerAction(PlayerEntity player, ServerWorld worldIn, BlockPos pos)
+    @Override
+    public void doPlayerAction(Player player, ServerLevel worldIn, BlockPos pos)
     {
         if (!worldIn.isClientSide)
         {
-            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+            ServerPlayer serverPlayer = (ServerPlayer) player;
             serverPlayer.connection.disconnect(MessageHelper.constructTranslation(ID, "disconnect_message"));
         }
     }
