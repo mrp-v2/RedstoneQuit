@@ -17,6 +17,9 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 String mcVersion = version.split('-')[0]
 if (forgeVersion == "latest" || forgeVersion == "recommended") {
