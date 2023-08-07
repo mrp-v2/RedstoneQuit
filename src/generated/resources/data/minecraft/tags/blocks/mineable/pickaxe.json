@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "redstonequit:redstone_quit_block",
+    "redstonequit:redstone_quit_test_block"
+  ]
+}

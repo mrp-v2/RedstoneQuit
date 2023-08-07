@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "redstonequit:block/redstone_quit_test_block"
+    }
+  }
+}
